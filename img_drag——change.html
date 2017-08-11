@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>图片拉伸拖拽可以改变大小，并旋转</title>
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.ui.all.css">
+	<script src="js/jquery-ui-1.8.2.custom.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+</head>
+<body>
+	<!-- 上下左右拉伸可以缩放图片，但是按照等比例缩放的，不是拉伸哪一边哪一边就缩放； 可以做的效果是：当拉伸哪一边时就缩放哪一边；而不是等比例缩放。-->
+<fieldset style="width=: 350px;">
+	<legend>缩放组件</legend>
+	<script>
+		$(document).ready(function() {
+			function callback(e, ui) {
+				var content = "<li>触发"+e.type+"事件，当前大小" + ui.size.width + "*" + ui.size.height + "</li>";
+				$('ol').append(content);
+			}
+			$('#resizable').resizable({
+				aspectRatio: true,
+				minHeight: 100, 
+				minWidth: 400,
+				maxHeight: 450, 
+				maxWidth: 500,
+				start: callback,
+				resize: callback,
+				stop: callback,
+				animate: true,
+				animateDuration: 500,
+				animateEasing: 'swing',
+				aspectRatio: .75,
+				autoHide: true,
+				containment: 'parent'
+				//cancel: 'input, option'
+
+			});
+		});
+
+
+	</script>
+	<ol style="font-size: 12px; width: 300px; height: 80px; overflow: auto; border: 2px solid #ccc;"></ol>
+	<!-- 这个是可缩放的窗体，设置的宽高是默认值 -->
+	<div id="resizable" class="ui-widget-content" style="width: 200px; height: 100px; padding: 3px; font-size: 12px;">
+		<div class="ui-widget-header" style="text-align: center;">可缩放元素</div>
+		<p>缩放时保持长宽比例，并限制最大值</p>
+	</div>
+</fieldset>
+</body>
+</html>

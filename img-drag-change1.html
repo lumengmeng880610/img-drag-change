@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>图片的四个方向拉伸可以缩放那一边的大小，并可以拖拽图片，移动图片的位置</title>
+	<!--[if IE]> 
+		<script src="canvas_files/excanvas.js"></script>
+	<![endif]-->
+	<style>
+		body {
+			font: 75% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif; 
+		}
+		canvas 	{ background-color: transparent; border: 1px solid gray; top: 0; left: 0; position: absolute;}
+		canvas.resize-ne { cursor: ne-resize; }
+		canvas.resize-se { cursor: se-resize; }
+		canvas.resize-sw { cursor: sw-resize; }
+		canvas.resize-nw { cursor: nw-resize; }
+		canvas.move { cursor: move; }
+		canvas.default { cursor: default; }
+		img 	{ display: block; visibility: hidden; position: absolute; top: -1000; left: -1000; }
+		input 	{ margin-left: 20px; }
+		fieldset { width: 280px; float: left; }
+		.fieldset { width: 200px; float: left; }
+		#ft 	{ background-color: #eee; height: 70px; width: 99%; border-top: 1px solid #ccc; padding: 5px; position: absolute; top: 0; left: 0; }
+		#ft span { width: 100%; }
+	</style>
+	<script src="js/utilitie.js"></script>
+	<script src="js/canvasEl.js"></script>
+	<script src="js/canvasIm.js"></script>
+	<script>
+		var CanvasDemo = function () {
+			var YD = YAHOO.util.Dom;
+			var YE = YAHOO.util.Event;
+			var canvas1;
+			var img = [];
+			return {
+				init: function() {
+					canvas1 = new Canvas.Element();
+					canvas1.init('canvid1', {
+						width: YD.getViewportWidth - 5,
+						height: YD.getViewportHeight() - 5
+					});
+					img[img.length] = new Canvas.Img('img1', {});
+					img[img.length] = new Canvas.Img('img2', {});
+					img[img.length] = new Canvas.Img('img3', {});
+					img[img.length] = new Canvas.Img('img1', {});
+					img[img.length] = new Canvas.Img('bg', {});
+					img[img.length] = new Canvas.Img('img4', {});
+					img[img.length] = new Canvas.Img('img4', {});
+					canvas1.addImage(img[0]);
+					canvas1.addImage(img[1]);
+					canvas1.addImage(img[2]);
+					canvas1.setCanvasBackground(img[3]);
+					canvas1.addImage(img[4]);
+					this.initEvents();
+				},
+				initEvents: function () {
+					YE.on('togglebg','click', this.toggleBg, this, true);
+					YE.on('showcorners','click', this.showCorners, this, true);
+					YE.on('togglenone','click', this.toggleNone, this, true);
+					YE.on('toggleborders','click', this.toggleBorders, this, true);
+					YE.on('togglepolaroid','click', this.togglePolaroid, this, true);
+					YE.on('pngbutton','click', function() { this.convertTo('png') }, this, true);
+					YE.on('jpegbutton','click', function() { this.convertTo('jpeg') }, this, true);
+
+				},
+				switchBg: function() {
+					canvas1.fillBckground = (canvas1.fillBackground) ? false : true;
+					canvas1.renderAll();
+				},
+				showcorners: function () {
+					this.cornersvisible = (this.cornersvisible) ? false : true;
+					for(var i = 0, l = canvas1._aImages.length; i < l; i +=1) {
+						canvas1._aImages[i].setCanvasVisibility(this.cornersvisible);
+					}
+					canvas1.renderAll();
+				},
+				toggleNone: function () {
+					for(var i = 0; l = canvas1._aImages.length; i < l; i +=1) {
+						canvas1._aImages
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>
